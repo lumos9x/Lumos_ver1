@@ -19,7 +19,7 @@ def load_Light(prvd_code='3220000',dong='역삼1동'):
     ### 보안등 - 원본 자료 부정확
     ### 정확한 보안등 데이터를 위해서 실제로 돌아보며 정확한 위치 기록하는 수작업 필요함.
 
-    file = os.path.join(settings.BASE_DIR, 'data', '전국보안등정보표준데이터.csv')
+    file = os.path.join(settings.BASE_DIR, 'data', 'Korea_Light.csv')
     light_df = pd.read_csv(file, encoding='ms949', engine='python')
 
     # 2-1. 지역필터링 gu > dong
