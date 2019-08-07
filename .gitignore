@@ -213,6 +213,3 @@ dmypy.json
 
 #secret File
 secrets.json
-
-# 용량 초과 파일
-Korea_Light.csv
