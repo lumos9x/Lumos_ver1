@@ -6,7 +6,6 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.common.by import By
 from selenium.common.exceptions import TimeoutException
-from bs4 import BeautifulSoup
 
 import pandas as pd
 
@@ -46,36 +45,39 @@ class MapCrawling:
         driver.get('https://map.naver.com/')
         wait = WebDriverWait(driver, 20)   # 명시적 대기. 명시된 시간까지 기다리고 아니면 TimeoutException. cf) time.sleep(10): loading 여부와 상관없이 항상 정해진 시간을 기다림)
 
-        # 2. re
+        # 2. Researching
         driver.find_element_by_id('search-input').send_keys(dong + " " + facility) # '역삼1동 편의점'
         driver.find_element_by_css_selector('#header > div.sch > fieldset > button').click()
 
         page, cs_name, cs_address  = 1, [], []
 
-        #.
+        #.3. Crawling
         while( True ):
-
-            # expected_conditions.presence_of_element_located: An expectation for checking that an element is present on the DOM of a page. 올라갔는지 확인
-            # expected_conditions.staleness_of : returns False if the element is still attached to the DOM, true otherwise. 아직 올리고 있는지 확인.
-
-            # 의문점 : staleness_of와 presence_of_element_located 중복해서 쓸 필요가 있을까?
-            #   I Guess......
-            #   click하기전에 element를 저장해두고 click후에 해당 element가 여전히 있는지 확인. 없다면 그것은 click하고 새로운 페이지가 load됐다는 뜻이야.
-            #   그담에 presence_of_element_located로 내가 원하는 애가 정상적으로 올라와있는지 확인하고 다음 코드를 진행하는 것!
-
+            ###############################################################################################################################
+            # [ https://seleniumhq.github.io/selenium/docs/api/py/webdriver_support/selenium.webdriver.support.expected_conditions.html ]  #
+            # presence_of_element_located: An expectation for checking that an element is present on the DOM of a page. 올라갔는지 확인      #
+            # staleness_of : returns False if the element is still attached to the DOM, true otherwise. 아직 올리고 있는지 확인.              #
+            # 의문점 : staleness_of와 presence_of_element_located 중복해서 쓸 필요가 있을까?                                                    #
+            #   I Guess......                                                                                                             #
+            #   click하기전에 element를 저장해두고 click후에 해당 element가 여전히 있는지 확인. 없다면 그것은 click하고 새로운 페이지가 load됐다는 뜻이야.  #
+            #   그담에 presence_of_element_located로 내가 원하는 애가 정상적으로 올라와있는지 확인하고 다음 코드를 진행하는 것!                          #
+            ###############################################################################################################################
+            # 3-1. Get a new list
             try:
                 cs_list = wait.until( expected_conditions.presence_of_all_elements_located((By.CLASS_NAME, "lsnx_det")))
 
             except TimeoutException:
                 print("해당 페이지에 lsnx_det 을 ID 로 가진 태그가 존재하지 않거나, 해당 페이지가 10초 안에 열리지 않았습니다.")
 
+
+            # 3-2. Store the addresses
             for data in cs_list:
                 title = data.find_element_by_tag_name('a').text
                 address = data.find_element_by_class_name('addr').text
                 cs_name.append(title)
                 cs_address.append(address[:100])
 
-            # 2. 페이지 넘기기
+            # 3-2. Move to the next page
             # print(page)
             page = page + 1
             page_mod = page % numPages
@@ -102,6 +104,7 @@ class MapCrawling:
 
         driver.close() # 드라이버 닫아주기
         print('naver_done')
+
         # 데이터 전처리
         res_df = preprcessingForGoogle(cs_name, cs_address)
         return res_df
