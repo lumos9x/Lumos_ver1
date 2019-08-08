@@ -108,8 +108,8 @@
 
       - [fin_distance_by_giseok.ipynb](https://github.com/lumos9x/DEV/blob/master/4_이관대상코드/fin_distance_by_giseok.ipynb)
 
-      - [1_크롤링_cv_store_gangnam.ipynb](https://github.com/lumos9x/DEV/blob/master/4_이관대상코드/Lumos_ver0/1_Data 수집 및 가공/1_크롤링_cv_store_gangnam.ipynb)
-      - [2_보안등_light_seoul.ipynb](https://github.com/lumos9x/DEV/blob/master/4_이관대상코드/Lumos_ver0/1_Data 수집 및 가공/2_보안등_light_seoul.ipynb)
+      - [1_크롤링_cv_store_gangnam.ipynb](https://github.com/lumos9x/DEV/blob/master/4_이관대상코드/Lumos_ver0/1_Data-수집-및-가공/1_크롤링_cv_store_gangnam.ipynb)
+      - [2_보안등_light_seoul.ipynb](https://github.com/lumos9x/DEV/blob/master/4_이관대상코드/Lumos_ver0/1_Data-수집-및-가공/2_보안등_light_seoul.ipynb)
 
   
 
