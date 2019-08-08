@@ -47,6 +47,8 @@
 
 
 
+
+
 ## 완료 작업  
 
 **[목표 1. 기존 .ipynb로 작성된 코드 .py로 이관하기] - ing** 
@@ -65,6 +67,8 @@
 
 
 
+
+
 ## 작업 일지 
 
 ### 2019-08-06
@@ -76,6 +80,7 @@
   - 후에 [POI]("[https://developers.kakao.com/docs/restapi/local#%EC%B9%B4%ED%85%8C%EA%B3%A0%EB%A6%AC-%EA%B2%80%EC%83%89](https://developers.kakao.com/docs/restapi/local#카테고리-검색)")이용해서 위치 중심으로 실시간 크롤링을 하는 방안도 연구해보기. 하지만 지금은 저장소에 저장하고 Spark 돌리는게 목표니까 한번에 가져와서 저장해놓자 
 
     
+
 
 ### 2019-08-07
 
@@ -101,6 +106,7 @@
 - git에 대용량 데이터 업로드에 문제가 있었던 것 해결
 
   <https://medium.com/@stargt/github에-100mb-이상의-파일을-올리는-방법-9d9e6e3b94ef>
+
 
 
 
