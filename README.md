@@ -112,9 +112,8 @@
       - [2_보안등_light_seoul.ipynb](https://github.com/lumos9x/DEV/blob/master/4_이관대상코드/Lumos_ver0/1_Data-수집-및-가공/2_보안등_light_seoul.ipynb)
 
   
-
+### 2019-08-08
 - 밝기 지도 
-
-- AStar
+    - shp 파일 로드한 것은 반드시 저장해야할 듯. 너무 느림!! (왜 느린지 검토하기!)
 
   

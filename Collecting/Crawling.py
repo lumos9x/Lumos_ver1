@@ -1,6 +1,5 @@
 # naver에서 편의점 목록을 크롤링하고, 해당 목록으로 google에서 경위도 좌표를 가져온다.
 import os
-import time
 from selenium import webdriver
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions
@@ -14,7 +13,14 @@ class MapCrawling:
 
     def processing(self, df, category_nm):
         # 공통 전처리 부분 / df 넘기기 전에 df 컬럼 [명칭,주소, 위도, 경도] 로 통일할 것.
-        return df
+        # 공통 전처리 부분 / df 넘기기 전에 df 컬럼 [명칭,주소, 위도, 경도] 로 통일할 것.
+        df1 = df.dropna()  # 1. NaN 값이 하나라도 들어가 있는 행은 그 행 전체를 제거
+        df1['분류'] = category_nm  # 2. 분류 추가하기.
+        df2 = df1.drop_duplicates(keep='first')  # 3. 중복되는 행 하나만 남기고 제거하기(부정확한 데이터)
+        # ex) [1599 rows x 4 columns] => [1231 rows x 4 columns]
+        res = df2.reset_index(drop=True)  # 4. reset index를 통해 index를 0부터 새롭게 지정.
+        return res
+
 
     def crawling_naver(self, dong, facility, num = 5):
         numPages = num  # 세트 하나당 page수
@@ -110,7 +116,6 @@ class MapCrawling:
         return res_df
 
     def crawling_google(self, input_df):
-        input_df.to_csv("stores.csv", mode='w', encoding='ms949')  # encoding 을 안 하면 한글이 깨짐
         # Get a dataframe of convenience store's coordinates.
         import googlemaps
         import settings
@@ -138,8 +143,9 @@ class MapCrawling:
 
     def crawling(self, dong, facility ):
         df = self.crawling_naver(dong, facility)
-        res = self.crawling_google(df)
-        return res
+        coords_df = self.crawling_google(df)
+        res_df = self.processing(coords_df, facility)
+        return res_df
 
 ## 저장소에 연결/저장 코드 추가 필요
 if __name__ == '__main__':
