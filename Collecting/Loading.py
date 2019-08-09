@@ -35,7 +35,7 @@ class LoadingCSV:
         dong_df2['경도'] = dong_df['경도']
         return self.preprocessing(dong_df2,'보안등')
 
-    def load_CCTV(self, dong):
+    def load_cctv(self, dong):
         file = os.path.join(settings.BASE_DIR, 'data', '서울특별시_강남구_CCTV_20190312.csv')
         gucc_df = pd.read_csv(file, encoding='ms949', engine='python')
         dongcc_df = gucc_df[gucc_df.소재지지번주소.str.contains(dong)]
@@ -58,7 +58,7 @@ class LoadingCSV:
 class LoadingSHP:
     import json
 
-    def load_SHP(self,file):
+    def load_shp(self,file):
         import shapefile  # pip install pyshp
         print('load_SHP')
         # 좌표 추출 함수
@@ -71,7 +71,6 @@ class LoadingSHP:
             outProj = Proj(init=outCoords)  # wgs84
 
             # 2. 좌표 변환/추출 #########매~~~~~~~~우느림 원인파악하기.)  --> 이부분 애초에 lat, lan으로 저장하도록 수정하자.
-
             COORDS = []
             for i in range(0, len(load_points)):
                 a = load_points[i]
@@ -126,11 +125,14 @@ class LoadingSHP:
         sorted_all_coords = all_coords.sort_values(by=['RDS_MAN_NO', 'RDS_MAN_NO2']).reset_index(drop=True)
         # all_coords.to_csv(f"1_3_COORDS_IN_{region}.csv", mode='w', encoding='ms949')  # edge(=link) list
         res_df = sorted_all_coords.loc[:, ['SIG_CD', 'RDS_MAN_NO', 'RDS_MAN_NO2', 'RN_CD', 'RN', 'LAT', 'LNG']]    #KEY : SIG_CD,RDS_MAN_NO,RDS_MAN_NO2
+
+        # 2_save_total_load_points.ipynb => 추가해야함.
+
         return res_df
 
-    def load_SHP_by_region(self, file, region):
+    def load_shp_by_region(self, file, region):
         # 다양한 지역 구성할때 경로 및 파일명 수정 필요
-        region_df = self.filter_region(self.load_SHP(file), region)
+        region_df = self.filter_region(self.load_shp(file), region)
         res = self.preprocessing(region_df)
         # res.to_csv(f"COORDS_IN_역삼동.csv", mode='w', encoding='ms949')  # edge(=link) list
         return res
@@ -145,7 +147,7 @@ if __name__ == '__main__':
     ## SHP
     rd_shp = LoadingSHP()
     file = os.path.join(settings.BASE_DIR , 'data', '서울특별시_강남구', '11680', 'TL_SPRD_MANAGE.shp' )
-    res = rd_shp.load_SHP_by_region(file, '역삼동')
+    res = rd_shp.load_shp_by_region(file, '역삼동')
     # res.to_csv(f"COORDS_IN_역삼동.csv", mode='w', encoding='ms949')  # edge(=link) list
     print(res.head(5))
 
