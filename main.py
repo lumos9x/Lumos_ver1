@@ -25,7 +25,7 @@ if __name__ == "__main__":
 #     # cctv.to_csv("cctv.csv", mode='w', encoding='ms949')
 #
 # #    2-2. shp
-#     file = os.path.join(settings.BASE_DIR, 'data', '서울특별시_강남구', '11680', 'TL_SPRD_MANAGE.shp')
+#     file = os.path.join(settings.BASE_DIR, 'data', '서울특별시_강남구_도로정보', '11680', 'TL_SPRD_MANAGE.shp')
 #     rd_shp = LoadingSHP()
 #     road_coords = rd_shp.load_shp_by_region(file, '역삼동')
 #     print(road_coords.head(30))

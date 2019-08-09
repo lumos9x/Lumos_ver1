@@ -146,7 +146,7 @@ if __name__ == '__main__':
 
     ## SHP
     rd_shp = LoadingSHP()
-    file = os.path.join(settings.BASE_DIR , 'data', '서울특별시_강남구', '11680', 'TL_SPRD_MANAGE.shp' )
+    file = os.path.join(settings.BASE_DIR , 'data', '서울특별시_강남구_도로정보', '11680', 'TL_SPRD_MANAGE.shp' )
     res = rd_shp.load_shp_by_region(file, '역삼동')
     # res.to_csv(f"COORDS_IN_역삼동.csv", mode='w', encoding='ms949')  # edge(=link) list
     print(res.head(5))

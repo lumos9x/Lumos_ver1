@@ -13,7 +13,6 @@ class MapCrawling:
 
     def processing(self, df, category_nm):
         # 공통 전처리 부분 / df 넘기기 전에 df 컬럼 [명칭,주소, 위도, 경도] 로 통일할 것.
-        # 공통 전처리 부분 / df 넘기기 전에 df 컬럼 [명칭,주소, 위도, 경도] 로 통일할 것.
         df1 = df.dropna()  # 1. NaN 값이 하나라도 들어가 있는 행은 그 행 전체를 제거
         df1['분류'] = category_nm  # 2. 분류 추가하기.
         df2 = df1.drop_duplicates(keep='first')  # 3. 중복되는 행 하나만 남기고 제거하기(부정확한 데이터)
