@@ -14,10 +14,13 @@
 
 [**작업 일지**](#작업-일지)
 
+![길찾기](https://github.com/arara90/images/blob/master/Lumos/findingway.png?raw=true)
+
+[그림 1 : Lumos_ver0 : 안전한길찾기]
 
 ![밝기지도](https://github.com/lumos9x/DEV/blob/master/4_%EC%9D%B4%EA%B4%80%EB%8C%80%EC%83%81%EC%BD%94%EB%93%9C/Lumos_ver0/6_%EB%B0%9C%ED%91%9C%EC%9E%90%EB%A3%8C/3_%EB%B0%9D%EA%B8%B0%EC%A7%80%EB%8F%84zoom.PNG?raw=true)
 
-[그림 1 : Lumos_ver0 : 밝기지도]
+[그림 2 : Lumos_ver0 : 밝기지도]
 
 
 
