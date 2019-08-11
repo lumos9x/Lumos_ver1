@@ -24,7 +24,7 @@ class MapCrawling:
     def crawling_naver(self, dong, facility, num = 5):
         numPages = num  # 세트 하나당 page수
 
-        def preprcessingForGoogle(cs_name, cs_address):
+        def preprocessingForGoogle(cs_name, cs_address):
             # '서울특별시 강남구 테헤란로 201 아주빌딩 지번' 형태로 출력되어 오른쪽의 지번을 제거해준다.
             li1 = []
             for i in range(0, len(cs_address)):
@@ -111,7 +111,7 @@ class MapCrawling:
         print('naver_done')
 
         # 데이터 전처리
-        res_df = preprcessingForGoogle(cs_name, cs_address)
+        res_df = preprocessingForGoogle(cs_name, cs_address)
         return res_df
 
     def crawling_google(self, input_df):
