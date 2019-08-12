@@ -40,7 +40,7 @@ class LightMap:
         #link_df.to_csv(os.path.join(settings.BASE_DIR, 'output', 'links_with_lux.csv' ), mode='w', encoding='ms949') # edge(=link) list
         return link_df
 
-    def display(self,road_df,link_df):
+    def display(self,road_df,link_df,isOpen = False):
         # display on Map
         import folium
 
@@ -83,9 +83,10 @@ class LightMap:
         filepath = os.path.join(settings.BASE_DIR, 'output', 'map.html')
         map_osm.save(filepath)
 
-        # import webbrowser
-        # filepath = os.path.join(settings.BASE_DIR, 'output', 'map.html')
-        # webbrowser.open('file://' + filepath)
+        if isOpen:
+            import webbrowser
+            filepath = os.path.join(settings.BASE_DIR, 'output', 'map.html')
+            webbrowser.open('file://' + filepath)
 
 
 

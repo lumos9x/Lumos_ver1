@@ -69,7 +69,7 @@ if __name__ == "__main__":
     ## 3. Map
     lm = LightMap()
     res = lm.lux_on_link(road_df)
-    print(res.head(4))
+    lm.display(road_df, res, True)
 
 
 
