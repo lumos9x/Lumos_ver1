@@ -3,6 +3,7 @@ import settings
 from Collecting.Crawling import MapCrawling   # Crawling을 class로 묶지 않으면 import하는 순간에 크롬이 실행된다.
 from Collecting.Loading import LoadingCSV, LoadingSHP
 from Collecting.Preprocessing import Scoring
+from LightsOnStreets.Map.Map import LightMap
 
 import pandas as pd
 
@@ -63,7 +64,13 @@ if __name__ == "__main__":
     ## 2. Scoring
     scr = Scoring()
     scored_road = scr.get_scored_road(facility_df, road_df)
-    print(scored_road.head(5))
+    print(scored_road.head(3))
 
     ## 3. Map
+    lm = LightMap()
+    res = lm.lux_on_link(road_df)
+    print(res.head(4))
+
+
+
     ## 4. PathFinding

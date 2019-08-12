@@ -1,5 +1,5 @@
 # naver에서 편의점 목록을 크롤링하고, 해당 목록으로 google에서 경위도 좌표를 가져온다.
-import os
+import os, settings
 from selenium import webdriver
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions
@@ -45,7 +45,8 @@ class MapCrawling:
             return res_df
 
         # 1. driver setting: This version of ChromeDriver supports Chrome version 76
-        driver_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'chromedriver.exe')
+        # driver_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'chromedriver.exe')
+        driver_path = os.path.join(settings.BASE_DIR, 'chromedriver.exe')
         driver = webdriver.Chrome(driver_path)
         driver.get('https://map.naver.com/')
         wait = WebDriverWait(driver, 20)   # 명시적 대기. 명시된 시간까지 기다리고 아니면 TimeoutException. cf) time.sleep(10): loading 여부와 상관없이 항상 정해진 시간을 기다림)

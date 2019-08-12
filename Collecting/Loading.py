@@ -2,6 +2,9 @@ import pandas as pd
 import settings
 import os
 
+## shp 컬럼 정보
+##
+
 
 class LoadingCSV:
     def preprocessing(self, df, category_nm):
@@ -122,7 +125,7 @@ class LoadingSHP:
                                                                         , 'LAT': tmp.COORDS[j][1]
                                                                         , 'LNG': tmp.COORDS[j][0]}, orient='index').T)
 
-        sorted_all_coords = all_coords.sort_values(by=['RDS_MAN_NO', 'RDS_MAN_NO2']).reset_index(drop=True)
+        sorted_all_coords = all_coords.sort_values(by=['RN_CD', 'RDS_MAN_NO', 'RDS_MAN_NO2']).reset_index(drop=True)
         # all_coords.to_csv(f"1_3_COORDS_IN_{region}.csv", mode='w', encoding='ms949')  # edge(=link) list
         res_df = sorted_all_coords.loc[:, ['SIG_CD', 'RDS_MAN_NO', 'RDS_MAN_NO2', 'RN_CD', 'RN', 'LAT', 'LNG']]    #KEY : SIG_CD,RDS_MAN_NO,RDS_MAN_NO2
 

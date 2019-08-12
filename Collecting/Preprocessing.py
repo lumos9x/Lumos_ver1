@@ -64,6 +64,7 @@ class Scoring:
 
 
 
+
 if __name__ == "__main__":
 
     base_dir = settings.BASE_DIR
