@@ -109,6 +109,8 @@ class LoadingSHP:
     def preprocessing(self, df):
         print('preprocessing')
         # COORDS에 묶여있는 Node정보 Row로 저장
+        # 'SIG_CD' , 'RDS_MAN_NO', 'RN', 'RN_CD', 'ROAD_BT', 'ROAD_LT', 'LAT', 'LNG'
+        # '시군구코드','도로구간일련번호','도로명','도로명코드','도로폭','도로길이','위도', '경도'
         all_coords = pd.DataFrame(columns=['SIG_CD', 'RDS_MAN_NO', 'RN', 'RN_CD', 'ROAD_BT', 'ROAD_LT', 'LAT', 'LNG'])
         tmp = pd.DataFrame( columns=['SIG_CD', 'RDS_MAN_NO', 'RN', 'RN_CD', 'RDS_MAN_NO2', 'ROAD_BT', 'ROAD_LT', 'COORDS'])
 

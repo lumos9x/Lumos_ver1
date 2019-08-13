@@ -88,8 +88,6 @@ class LightMap:
             filepath = os.path.join(settings.BASE_DIR, 'output', 'map.html')
             webbrowser.open('file://' + filepath)
 
-
-
 if  __name__ == '__main__':
     lm = LightMap()
     road_df = pd.read_csv(os.path.join(settings.BASE_DIR, 'output', "road_with_light.csv"), encoding='ms949')

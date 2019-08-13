@@ -7,7 +7,7 @@ class Scoring:
 
     def light_score_on_facility(self, facility_df):
     #  Give each facility 'light(밝기)' score based on survey result.
-        all_df = pd.DataFrame(columns=['feature_ID', '밝기', '분류', '명칭', '위도', '경도'])
+        all_df = pd.DataFrame(columns=['밝기', '분류', '명칭', '위도', '경도'])
         for i in range(len(facility_df)):
             score = 0
             if facility_df['분류'][i] == '파출소':
@@ -21,8 +21,7 @@ class Scoring:
             else :
                 print('WARNING : Detected wrong category!! ')
 
-            tmp = {'feature_ID': 'Point_%d' % i,
-                   '밝기': score,
+            tmp = {'밝기': score,
                    '분류': facility_df.loc[i, '분류'], '명칭': facility_df.loc[i, '명칭'],
                    '위도': facility_df.loc[i, '위도'], '경도': facility_df.loc[i, '경도']
                    }
@@ -54,6 +53,7 @@ class Scoring:
         print("road_with_light : ", len(road_df))
         return road_df
 
+
     def get_scored_road(self,total_df, road_df, meter = 30):
         # 시설물에 점수주기
         scored_facility_df = self.light_score_on_facility(total_df)
@@ -61,8 +61,6 @@ class Scoring:
         # 로드좌표에 점수주기
         scored_road = self.total_light_score_on_road(scored_facility_df, road_df)
         return scored_road
-
-
 
 
 if __name__ == "__main__":
