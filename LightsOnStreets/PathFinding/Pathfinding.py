@@ -34,8 +34,13 @@ class SafePath:
 
         def transform_road_df(road_df):
             road_df.drop(['SIG_CD', 'RDS_MAN_NO', 'RDS_MAN_NO2', 'RN_CD'], axis=1, inplace=True)
-            road_df.rename(columns={'Unnamed: 0': 'ID',
-                                    '총밝기': '밝기',
+
+            # .csv 파일 직접 로드했을 시
+            # if 'Unnamed: 0' in road_df.columns :
+            #     road_df.drop(columns='Unnamed: 0', axis=1, inplace=True)
+
+            road_df['ID'] = road_df.index
+            road_df.rename(columns={'총밝기': '밝기',
                                     'RN': '명칭',
                                     'LAT': '위도',
                                     'LNG': '경도'}, inplace=True)
@@ -95,11 +100,11 @@ class SafePath:
 
             # 2. Scaled_F : 밝기 0~100 에 맞추기
         def get_scaled_f(df):
-            X_MinMax_scaled = 110 - minmax_scale(df['F'], axis=0, copy=True, feature_range=(0, 110))
+            X_MinMax_scaled = 100 - minmax_scale(df['F'], axis=0, copy=True, feature_range=(0, 100))
             return X_MinMax_scaled
 
             # 3. 밝기 이용한 가중치 추가 W(weight = 4F(거리) + 6L(밝기))
-        def get_w(df, w_lux=40, w_f=80):
+        def get_w(df, w_lux=40, w_f=120):
             w = np.array(df.apply(lambda x: (x['밝기'] * w_lux) + (x['scaled_F'] * w_f), axis=1)).reshape(-1, 1)
             return w
 
@@ -132,7 +137,7 @@ class SafePath:
         self.save_path()
         print("done, len : ", len(self.closed_list))
 
-        # display
+
         # # 역삼동 중심 = 역삼역 /  좌표 : 37.500742, 127.036891
     def save_path(self,show=False):
         map = folium.Map(location= self.sp, zoom_start=18)
@@ -152,15 +157,16 @@ class SafePath:
             import webbrowser
             webbrowser.open('file://' + filepath)
 
+    def get_safe_path(self,road_df,start =(37.506059, 127.036863),  end =(37.509122, 127.043816) ):
+        self.find_path(sp.set_destination(road_df, start, end))
+
 if __name__ == '__main__':
     # 도로 정보이지만 시설물과 도로좌표를 합쳐서 더 촘촘한 정보를 얻을 수 있다.
     road_df = pd.read_csv(os.path.join(settings.BASE_DIR, 'output', 'road_with_light.csv'), encoding = "EUC-KR" )
-    print("read")
-    # start = (37.506059, 127.036863), end = (37.509122, 127.043816)
-
+    import time
+    print(time.time())
     sp = SafePath()
-    df = sp.set_destination(road_df, start = (37.506059, 127.036863),  end = (37.509122, 127.043816) )
-    # res = sp.find_path(df, 300)
-    print(sp.find_path(df, 300))
-    # sp.display(True)
+    sp.find_path(sp.set_destination(road_df, start = (37.506059, 127.036863),  end = (37.509122, 127.043816)))
+    print(time.time())
+
 

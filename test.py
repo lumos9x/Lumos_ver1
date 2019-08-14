@@ -50,3 +50,12 @@ print (format(30,'05')) #2.6이상
 # >>> mylis = ['this is test', 'another test']
 # >>> [item.upper() for item in mylis]
 # ['THIS IS TEST', 'ANOTHER TEST']
+
+
+total_df = pd.read_csv(os.path.join(settings.BASE_DIR, 'output', 'road_with_light.csv'), encoding="EUC-KR")
+if 'Unnamed: 0' in total_df.columns :
+    total_df.drop(columns='Unnamed: 0', axis=1, inplace=True)
+total_df['ID'] = total_df.index
+
+
+print(total_df.head(5))

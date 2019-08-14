@@ -4,6 +4,8 @@ from Collecting.Crawling import MapCrawling   # Crawling을 class로 묶지 않�
 from Collecting.Loading import LoadingCSV, LoadingSHP
 from Collecting.Preprocessing import Scoring
 from LightsOnStreets.Map.Map import LightMap
+from LightsOnStreets.PathFinding.Pathfinding import SafePath
+
 
 import pandas as pd
 
@@ -67,10 +69,12 @@ if __name__ == "__main__":
     print(scored_road.head(3))
 
     ## 3. Map
-    lm = LightMap()
-    res = lm.lux_on_link(road_df)
-    lm.display(road_df, res, True)
-
-
+    # lm = LightMap()
+    # res = lm.lux_on_link(road_df)
+    # lm.display(road_df, res, True)
 
     ## 4. PathFinding
+    sp = SafePath()
+    sp.find_path(sp.set_destination(road_df, start=(37.506059, 127.036863), end=(37.509122, 127.043816)))
+
+    print(road_df)

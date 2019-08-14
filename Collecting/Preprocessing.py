@@ -10,14 +10,15 @@ class Scoring:
         all_df = pd.DataFrame(columns=['밝기', '분류', '명칭', '위도', '경도'])
         for i in range(len(facility_df)):
             score = 0
+            # 설문 결과
             if facility_df['분류'][i] == '파출소':
-                score += 25.471
+                score += 250 #25.471
             elif facility_df['분류'][i] == '보안등':
-                score += 28.397
+                score += 280 #28.397
             elif facility_df['분류'][i] == '편의점':
-                score += 21.774
+                score += 210 #21.774
             elif facility_df['분류'][i] == 'CCTV':
-                score += 24.357
+                score += 240 #24.357
             else :
                 print('WARNING : Detected wrong category!! ')
 
