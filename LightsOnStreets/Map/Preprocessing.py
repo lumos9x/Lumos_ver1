@@ -12,13 +12,13 @@ class Scoring:
             score = 0
             # 설문 결과
             if facility_df['분류'][i] == '파출소':
-                score += 250 #25.471
+                score += 25.471
             elif facility_df['분류'][i] == '보안등':
-                score += 280 #28.397
+                score += 28.397
             elif facility_df['분류'][i] == '편의점':
-                score += 210 #21.774
+                score += 21.774
             elif facility_df['분류'][i] == 'CCTV':
-                score += 240 #24.357
+                score += 24.357
             else :
                 print('WARNING : Detected wrong category!! ')
 
@@ -52,6 +52,7 @@ class Scoring:
         road_df['총밝기'] = scores
         road_df.to_csv(os.path.join(settings.BASE_DIR,'output',"road_with_light.csv"), mode='w', encoding='ms949')
         print("road_with_light : ", len(road_df))
+
         return road_df
 
 
@@ -79,7 +80,7 @@ if __name__ == "__main__":
     print(scored_facility_df.head(5))
 
     # 로드좌표에 점수주기
-    road_df = pd.read_csv(os.path.join(base_dir, 'output', "COORDS_IN_역삼동.csv"), encoding='ms949')
+    road_df = pd.read_csv(os.path.join(base_dir, 'output', "COORDS_IN_YS.csv"), encoding='ms949')
     road_df.drop('Unnamed: 0', axis=1, inplace=True)
     scored_road = Scr.total_light_score_on_road(scored_facility_df,road_df)
     print(scored_road.head(5))

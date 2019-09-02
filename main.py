@@ -1,11 +1,7 @@
 import os
 import settings
-from Collecting.Crawling import MapCrawling   # Crawling을 class로 묶지 않으면 import하는 순간에 크롬이 실행된다.
-from Collecting.Loading import LoadingCSV, LoadingSHP
-from Collecting.Preprocessing import Scoring
+from LightsOnStreets.Map.Preprocessing import Scoring
 from LightsOnStreets.Map.Map import LightMap
-from LightsOnStreets.PathFinding.Pathfinding import SafePath
-
 
 import pandas as pd
 
@@ -44,7 +40,7 @@ def collect_data():
     total_without_road.drop('Unnamed: 0', axis=1, inplace=True)
     print(total_without_road.head(4))
 
-    road_coords = pd.read_csv(os.path.join(base_dir, 'output', "COORDS_IN_역삼동.csv"), encoding='ms949')
+    road_coords = pd.read_csv(os.path.join(base_dir, 'output', "COORDS_IN_YS.csv"), encoding='ms949')
     road_coords.drop('Unnamed: 0', axis=1, inplace=True)
     print(road_coords.head(4))
 
@@ -69,12 +65,12 @@ if __name__ == "__main__":
     print(scored_road.head(3))
 
     ## 3. Map
-    # lm = LightMap()
-    # res = lm.lux_on_link(road_df)
-    # lm.display(road_df, res, True)
+    lm = LightMap()
+    res = lm.lux_on_link(road_df)
+    lm.display(road_df, res, True)    # True 창 띄워서 보기 , False 저장만하기
 
     ## 4. PathFinding
-    sp = SafePath()
-    sp.find_path(sp.set_destination(road_df, start=(37.506059, 127.036863), end=(37.509122, 127.043816)))
-
-    print(road_df)
+    # sp = SafePath()
+    # sp.find_path(sp.set_destination(road_df, start=(37.506059, 127.036863), end=(37.509122, 127.043816)))
+    #
+    # print(road_df)

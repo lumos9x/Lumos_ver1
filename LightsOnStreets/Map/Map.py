@@ -48,7 +48,7 @@ class LightMap:
         nodes = road_df[['RN_CD', 'RN', 'RDS_MAN_NO', 'LAT', 'LNG']]
         links = link_df[['SP', 'EP', 'LUX']]
 
-        std_point = (nodes.loc[0, 'LAT'], nodes.loc[0, 'LNG'])
+        std_point = (37.503830, 127.034781) #(nodes.loc[0, 'LAT'], nodes.loc[0, 'LNG'])
         map_osm = folium.Map(location=std_point, width='100%', height='100%', zoom_start=17)
 
         # Draw Links
@@ -62,21 +62,21 @@ class LightMap:
                 folium.PolyLine(
                     locations=[start, end],
                     color='#FF00CC',  # 노락색(yellow)은 잘 안보임, 주황색(orange)도 그닥인듯
-                    line_cap='round',
+                    #line_cap='round',
                     **kw,
                 ).add_to(map_osm)
             elif kw['weight'] < 10:
                 folium.PolyLine(
                     locations=[start, end],
                     color='#FF6633',
-                    line_cap='round',
+                    # line_cap='round',
                     **kw,
                 ).add_to(map_osm)
             else:
                 folium.PolyLine(
                     locations=[start, end],
                     color='#FF0000',
-                    line_cap='round',
+                    # line_cap='round',
                     **kw,
                 ).add_to(map_osm)
 

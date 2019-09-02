@@ -5,7 +5,6 @@ import os
 ## shp 컬럼 정보
 ##
 
-
 class LoadingCSV:
     def preprocessing(self, df, category_nm):
         # 공통 전처리 부분 / df 넘기기 전에 df 컬럼 [명칭,주소, 위도, 경도] 로 통일할 것.
